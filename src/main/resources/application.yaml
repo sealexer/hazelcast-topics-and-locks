@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: "hazel-topics-and-locks"
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.hazelcast: INFO
+    com.alex.test: DEBUG
+
