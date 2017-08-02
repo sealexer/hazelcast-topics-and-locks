@@ -1,19 +1,9 @@
 package com.alex.test.hazelcast.util;
 
-/**
- * TODO: Describe me
- *
- * Checklist:
- * TODO Documentation
- * TODO Null tolerance
- * TODO Thread-safety
- * TODO Serializability
- *
- * @author Alexander Shusherov
- */
+
 public class ThreadUtil {
 
-  protected static final int HEAVY_OPERATION_DURATION_MS = 10000;
+  protected static final int HEAVY_OPERATION_DURATION_MS = 1000;
 
   public static String currentThreadName() {
     return Thread.currentThread().getName();
