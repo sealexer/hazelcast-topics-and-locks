@@ -29,6 +29,12 @@ public class TopicListener implements MessageListener<String> {
 
     String lockName = message.getMessageObject();
 
+    if (!isInitialized()) {
+      log.warn("Topic listener has not yet been initialized completely."
+          + " Dropping the message. [lockName={}]", lockName);
+      return;
+    }
+
     log.debug("Acquiring lock {}", lockName);
     ILock lock = hazelcastInstance.getLock(lockName);
 
@@ -54,6 +60,10 @@ public class TopicListener implements MessageListener<String> {
     }
 
     log.debug("By now listener has been invoked {} times", counter.incrementAndGet());
+  }
+
+  private boolean isInitialized() {
+    return hazelcastInstance != null;
   }
 
 //  @PostConstruct
