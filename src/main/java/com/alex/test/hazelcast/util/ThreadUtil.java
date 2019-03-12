@@ -10,10 +10,15 @@ public class ThreadUtil {
   }
 
   public static void someHeavyOperation() {
+    sleep(HEAVY_OPERATION_DURATION_MS);
+  }
+
+  public static void sleep(long millis) {
     try {
-      Thread.sleep(HEAVY_OPERATION_DURATION_MS);
+      Thread.sleep(millis);
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
+
 }

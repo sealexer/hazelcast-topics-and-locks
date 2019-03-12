@@ -1,6 +1,7 @@
 package com.alex.test.hazelcast.controllers;
 
 import com.alex.test.hazelcast.model.Person;
+import com.alex.test.hazelcast.util.ThreadUtil;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.ReplicatedMap;
@@ -36,20 +37,12 @@ public class TopicController {
     new Thread(() -> {
       for (int i = 0; i < NUMBER_OF_ITERATIONS; i++) {
         sendOneObject(counter.getAndIncrement());
-        sleep(SENDING_PERIOD_MILLIS);
+        ThreadUtil.sleep(SENDING_PERIOD_MILLIS);
       }
     }).start();
 
     return String.format("OK. Will send %1d objects in %2d seconds.",
         NUMBER_OF_ITERATIONS, TimeUnit.MILLISECONDS.toSeconds(NUMBER_OF_ITERATIONS * SENDING_PERIOD_MILLIS));
-  }
-
-  private void sleep(long millis) {
-    try {
-      Thread.sleep(millis);
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
   }
 
   private void sendOneObject(int i) {
